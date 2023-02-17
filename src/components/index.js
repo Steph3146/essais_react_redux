@@ -1,6 +1,11 @@
+import React from 'react';
+const redux = require('redux');
+const createStore = redux.createStore;
+
+
 const BUY_CAKE = "BUY_CAKE";
 
-function buyCake() {
+export default function buyCake() {
     return {
         type: BUY_CAKE,
         info: 'First redux action'
@@ -24,3 +29,10 @@ const reducer = (state = initialState, action) => {
         default: return state
     }
 }
+const store = createStore(reducer);
+console.log("initialState", store.getState());
+const unsubscribe = store.subscribe(() => console.log("Updated state", store.getState()));
+store.dispatch(buyCake())
+store.dispatch(buyCake())
+store.dispatch(buyCake())
+unsubscribe();
